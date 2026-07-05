@@ -3,6 +3,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    border-color: grey;
     &__input {
         padding-left: 42px;
         border: 1px solid #e5e7eb;
@@ -11,6 +12,10 @@
         outline: none;
         padding-top: 10px;
         padding-bottom: 10px;
+    }
+
+    &__input:hover {
+        border-color: black;
     }
 
     &__icon {
@@ -26,3 +31,4 @@
         pointer-events: none;
     }
 }
+
