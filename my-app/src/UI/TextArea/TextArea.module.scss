@@ -1,0 +1,14 @@
+.area {
+    height: 44px;
+    min-height: 120px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    outline: none;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    transition: 0.2s;
+}
+
+.area:hover {
+    border-color: black;
+}
