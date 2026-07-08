@@ -1,0 +1,17 @@
+.section {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    &__inputs {
+        display: flex;
+        gap: 4px;
+        flex-direction: column;
+    }
+    &__buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+}
