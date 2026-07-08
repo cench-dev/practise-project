@@ -5,6 +5,7 @@ import { authStore } from './Stores/authStore'
 import { useEffect } from 'react';
 
 import './App.css'
+import Account from './Pages/Account/Account';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path='/login' element={<Login />}/>
             <Route path='/' element={<ProtectedPages />}/>
+              <Route path='/user/:id' element={<Account />}/>
           </Routes>
         </BrowserRouter>
       </Provider>

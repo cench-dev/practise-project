@@ -2,13 +2,17 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { signIn } from '../../Reducers/authReducer';
+
 import * as yup from 'yup';
 import { Input } from '../../Components/UI/Input/Input';
 import { Button } from '../../Components/UI/Button/Button';
 import userIcon from '../../assets/user-circle (1).svg';
 import passwordIcon from '../../assets/key.svg';
+import { useDispatch } from 'react-redux';
 
 export default function Login() {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const schema = yup.object().shape({
@@ -22,12 +26,13 @@ export default function Login() {
 
     const submit = (data: yup.InferType<typeof schema>) => {
         console.log(data);
-        navigate('/');
+        dispatch(signIn())
+        navigate('/user/1');
     };
 
     return(
         <section className={styles.section}>
-            <h1>Login</h1>
+            <h1>Sign In or Sign Up</h1>
             <form onSubmit={form.handleSubmit(submit)} className='styles.form'>
                 <div className={styles.section__inputs}>
                     <Controller name="username" control={form.control} render={({ field }) => <Input placeholder='Username' onChange={field.onChange} value={field.value} type='text' icon={userIcon}/>} />
