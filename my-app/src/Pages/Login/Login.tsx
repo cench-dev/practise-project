@@ -16,8 +16,8 @@ export default function Login() {
     const navigate = useNavigate();
 
     const schema = yup.object().shape({
-        username: yup.string().required('Username is').min(3, 'Username must be at least 3 characters'),
-        password: yup.string().required('Password is').min(6, 'Password must be at least 6 characters')
+        username: yup.string().required('Username must be at least 3 characters').min(3, 'Username must be at least 3 characters'),
+        password: yup.string().required('Password must be at least 6 characters').min(6, 'Password must be at least 6 characters')
     });
 
     const form = useForm({
