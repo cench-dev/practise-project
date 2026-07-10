@@ -1,10 +1,20 @@
 import { useAuthDispatch, useAuthSelector } from '../../hooks/useAuthDispatch';
 import { changeRole } from '../../Reducers/authReducer';
 import { Button } from '../../Components/UI/Button/Button';
+import { ReadBooks } from '../../Components/ReadBooks/ReadBooks';
+import { PlannedBooks } from '../../Components/PlannedBooks/PlannedBooks';
+import { Wishlist } from '../../Components/Wishlist/Wishlist';
 import maleIcon from '../../assets/avatar_male.svg';
 import styles from './Account.module.scss';
+import { useState } from 'react';
 function Account() {
-  const {isAuth, isAdmin} = useAuthSelector()
+  const {isAuth, isAdmin} = useAuthSelector();
+  const [activeTab, setActiveTab] = useState('read');
+  const tabs = [
+    { id: 'read', label: 'Прочитано'},
+    { id: 'planned', label: 'Хочу прочитать'},
+    { id: 'wishlist', label: 'Wishlist'}
+  ]
   const dispatch = useAuthDispatch()
 
   const onChangeRole = () => {
@@ -14,7 +24,7 @@ function Account() {
   return (
     <>
       <section className={styles.account__header}>
-        <div className={styles.container}>
+        <div className={styles.account__headerContent}>
           <p>Добро пожаловать user!</p>
           <Button>
             Выйти
@@ -47,6 +57,16 @@ function Account() {
               </div>
             </div>
           </div>
+        </section>
+        <section className={styles.content}>
+          <div className={styles.buttons}>
+            {tabs.map((tab) =>(
+              <Button key={tab.id} onClick={() => setActiveTab(tab.id)}>{tab.label}</Button>
+            ))}
+          </div>
+          {activeTab === 'read' && <ReadBooks />}
+          {activeTab === 'planned' && <PlannedBooks />}
+          {activeTab === 'wishlist' && <Wishlist />}
         </section>
       </main>
     </>

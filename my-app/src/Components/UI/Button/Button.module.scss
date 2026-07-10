@@ -1,10 +1,16 @@
 .button {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     color: black;
     background-color: white;
     padding: 12px 20px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     border: 1px solid black;
+}
+
+.icon {
+    width: 18px;
+    height: 18px;
 }
