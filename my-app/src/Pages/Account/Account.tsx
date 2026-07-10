@@ -14,37 +14,41 @@ function Account() {
   return (
     <>
       <section className={styles.account__header}>
-        <p>Добро пожаловать user!</p>
-        <Button>
-          Выйти
-        </Button>
+        <div className={styles.container}>
+          <p>Добро пожаловать user!</p>
+          <Button>
+            Выйти
+          </Button>
+        </div>
       </section>
-      <section className={styles.account__info}>
-        <img src={maleIcon} className={styles.avatar}></img>
-        {/* <!--<h1>{isAuth ? 'Authorized' : 'Unauthorized'}</h1>
+      <main className={styles.container}>
+        <section className={styles.account__info}>
+          <img src={maleIcon} className={styles.avatar}></img>
+          {/* <!--<h1>{isAuth ? 'Authorized' : 'Unauthorized'}</h1>
 
-        <h2>{isAdmin ? 'Admin' : 'User'}</h2>
-        <button onClick={onChangeRole}>Change role</button> */}
-        <div>
-          <h1 className={styles.title}>Привет, user!</h1>
-          <div className={styles.account__count}>
-            <div className={styles.meta}>
-              <div className={styles.stats}>
-                <h2>Прочитано книг</h2>
-                <p className={styles.count}>700</p>
-              </div>
-              <div className={styles.stats}>
-                <h2>Хочу прочитать</h2>
-                <p className={styles.count}>800</p>
-              </div>
-              <div className={styles.stats}>
-                <h2>Цель прочитать на 2026 год</h2>
-                <p className={styles.count}>800</p>
+          <h2>{isAdmin ? 'Admin' : 'User'}</h2>
+          <button onClick={onChangeRole}>Change role</button> */}
+          <div>
+            <h1 className={styles.title}>Привет, user!</h1>
+            <div className={styles.account__count}>
+              <div className={styles.meta}>
+                <div className={styles.stats}>
+                  <h2>Прочитано книг</h2>
+                  <p className={styles.count}>700</p>
+                </div>
+                <div className={styles.stats}>
+                  <h2>Хочу прочитать</h2>
+                  <p className={styles.count}>800</p>
+                </div>
+                <div className={styles.stats}>
+                  <h2>Цель прочитать на 2026 год</h2>
+                  <p className={styles.count}>800</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
     </>
   )
 }
