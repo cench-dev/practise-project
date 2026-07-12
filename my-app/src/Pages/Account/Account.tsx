@@ -22,7 +22,6 @@ function Account() {
   const [activeTab, setActiveTab] = useState<BookStatus>('read');
 
   const dispatch = useAuthDispatch();
-  const filteredBooks = books.map((book) => book)
   const onChangeRole = () => {
     dispatch(changeRole(!isAdmin))
   }

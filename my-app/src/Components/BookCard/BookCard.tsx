@@ -13,9 +13,17 @@ export function BookCard( { book }: BookCardProps) {
             <img src={bookIcon} className={styles.icon}></img>
             <div className={styles.info}>
                 <div className={styles.meta}>
-                    <p >{ book.title }</p>
+                    <p>{ book.title }</p>
                     <p>{ book.author }</p>
-                    <p>{ book.rating }/5</p>
+                    {book.status === 'read' && (
+                        <p>{book.rating}/5</p>
+                    )}
+                    {book.status === 'wishlist' && (
+                        <p>{book.link}/5</p>
+                    )}
+                    {book.status === 'wishlist' && (
+                        <p>{ book.fabric }</p>
+                    )}
                 </div>
                 <p>{ book.review }</p>    
             </div>
