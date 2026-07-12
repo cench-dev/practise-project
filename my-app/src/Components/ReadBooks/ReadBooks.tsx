@@ -1,5 +1,8 @@
 import { Button } from "../UI/Button/Button";
 import addIcon from '../../assets/plus.svg'
+import { books } from "../../mock/mock";
+import { BookCard } from "../BookCard/BookCard";
+import styles from './ReadBooks.module.scss'
 
 export function ReadBooks() {
     return(
@@ -7,14 +10,20 @@ export function ReadBooks() {
             <Button icon={addIcon}>
                 Добавить книгу
             </Button>
-            <p>Название</p>
-            <p>1984</p>
-            <p>Автор</p>
-            <p>Джордж Оруэлл</p>
-            <p>Оценка</p>
-            <p>5/5</p>
-            <p>Отзыв</p>
-            <p>Клевая книга</p>
+            <div className={styles.books}>
+                {books.map((book) => (
+                    <BookCard
+                    key={book.id}
+                    title={book.title}
+                    author={book.author}
+                    rating={book.rating}
+                    review={book.review} />
+                ))}
+            </div>
         </>
     )
 }
+
+// прогресс бар
+// поменять label у статистики
+// аватар поменять 

@@ -3,6 +3,7 @@ import { changeRole } from '../../Reducers/authReducer';
 import { Button } from '../../Components/UI/Button/Button';
 import { ReadBooks } from '../../Components/ReadBooks/ReadBooks';
 import { PlannedBooks } from '../../Components/PlannedBooks/PlannedBooks';
+import { WishlistText } from '../../Components/WishlistText/WishlistText';
 import { Wishlist } from '../../Components/Wishlist/Wishlist';
 import maleIcon from '../../assets/avatar_male.svg';
 import styles from './Account.module.scss';
@@ -15,7 +16,7 @@ function Account() {
     { id: 'planned', label: 'Хочу прочитать'},
     { id: 'wishlist', label: 'Wishlist'}
   ]
-  const dispatch = useAuthDispatch()
+  const dispatch = useAuthDispatch();
 
   const onChangeRole = () => {
     dispatch(changeRole(!isAdmin))
@@ -58,10 +59,13 @@ function Account() {
             </div>
           </div>
         </section>
+        <section>
+          <WishlistText />
+        </section>
         <section className={styles.content}>
           <div className={styles.buttons}>
             {tabs.map((tab) =>(
-              <Button key={tab.id} onClick={() => setActiveTab(tab.id)}>{tab.label}</Button>
+              <Button key={tab.id} active={activeTab === tab.id} onClick={() => setActiveTab(tab.id)}>{tab.label}</Button>
             ))}
           </div>
           {activeTab === 'read' && <ReadBooks />}

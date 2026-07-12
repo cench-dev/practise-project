@@ -1,0 +1,23 @@
+.book {
+    display: flex;
+    gap: 8px;
+    border: 1px solid #E5E7EB;
+    background: #F5F5F5;
+    padding: 12px;
+}
+
+.icon {
+    width: 64px;
+    height: 64px;
+}
+
+.meta {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
