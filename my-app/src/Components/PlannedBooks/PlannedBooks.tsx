@@ -1,5 +1,6 @@
 import { Button } from "../UI/Button/Button";
 import addIcon from '../../assets/plus.svg';
+import { BookList } from "../BookList/BookList";
 
 export function PlannedBooks() {
     return(
@@ -7,8 +8,7 @@ export function PlannedBooks() {
             <Button icon={addIcon}>
                 Добавить книгу
             </Button>
-            <p>Автор</p>
-            <p>Грэг грегович</p>
+            <BookList status="planned"/>
         </>
     )
 }

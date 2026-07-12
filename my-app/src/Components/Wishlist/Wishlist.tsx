@@ -1,6 +1,7 @@
 import { Button } from "../UI/Button/Button"
 import { WishlistText } from "../WishlistText/WishlistText";
 import addIcon from '../../assets/plus.svg';
+import { BookList } from "../BookList/BookList";
 
 export function Wishlist() {
     return(
@@ -8,8 +9,7 @@ export function Wishlist() {
             <Button icon={addIcon}>Добавить книгу</Button>
             <WishlistText />
             
-            <p>Пушкин</p>
-            <p>Финес и ферб</p>
+            <BookList status="wishlist"/>
         </>
     )
 }
