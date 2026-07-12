@@ -1,8 +1,7 @@
 import { Button } from "../UI/Button/Button";
 import addIcon from '../../assets/plus.svg'
-import { books } from "../../mock/mock";
-import { BookCard } from "../BookCard/BookCard";
 import styles from './ReadBooks.module.scss'
+import { BookList } from "../BookList/BookList";
 
 export function ReadBooks() {
     return(
@@ -11,14 +10,7 @@ export function ReadBooks() {
                 Добавить книгу
             </Button>
             <div className={styles.books}>
-                {books.map((book) => (
-                    <BookCard
-                    key={book.id}
-                    title={book.title}
-                    author={book.author}
-                    rating={book.rating}
-                    review={book.review} />
-                ))}
+                <BookList status='read'/>
             </div>
         </>
     )

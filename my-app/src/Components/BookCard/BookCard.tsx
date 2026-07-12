@@ -1,24 +1,23 @@
 import styles from './BookCard.module.scss';
 import bookIcon from '../../assets/book-open.svg';
+import type { Book } from '../../mock/mock';
+
+
 type BookCardProps = {
-    title: string;
-    author: string;
-    rating: number;
-    review: string;
+    book: Book;
 }
 
-export function BookCard( { title, author, rating, review }: BookCardProps) {
-
+export function BookCard( { book }: BookCardProps) {
     return (
         <div className={styles.book}>
             <img src={bookIcon} className={styles.icon}></img>
             <div className={styles.info}>
                 <div className={styles.meta}>
-                    <p >{ title }</p>
-                    <p>{ author }</p>
-                    <p>{ rating }/5</p>
+                    <p >{ book.title }</p>
+                    <p>{ book.author }</p>
+                    <p>{ book.rating }/5</p>
                 </div>
-                <p>{ review }</p>    
+                <p>{ book.review }</p>    
             </div>
             
         </div>

@@ -3,20 +3,21 @@ import { changeRole } from '../../Reducers/authReducer';
 import { Button } from '../../Components/UI/Button/Button';
 import { ReadBooks } from '../../Components/ReadBooks/ReadBooks';
 import { PlannedBooks } from '../../Components/PlannedBooks/PlannedBooks';
-import { WishlistText } from '../../Components/WishlistText/WishlistText';
 import { Wishlist } from '../../Components/Wishlist/Wishlist';
 import maleIcon from '../../assets/avatar_male.svg';
 import styles from './Account.module.scss';
 import { useState } from 'react';
 function Account() {
+  type Tab = 'read' | 'planned' | 'wishlist';
   const {isAuth, isAdmin} = useAuthSelector();
-  const [activeTab, setActiveTab] = useState('read');
+  const [activeTab, setActiveTab] = useState<Tab>('read');
   const tabs = [
     { id: 'read', label: 'Прочитано'},
     { id: 'planned', label: 'Хочу прочитать'},
     { id: 'wishlist', label: 'Wishlist'}
   ]
   const dispatch = useAuthDispatch();
+  
 
   const onChangeRole = () => {
     dispatch(changeRole(!isAdmin))
@@ -58,9 +59,6 @@ function Account() {
               </div>
             </div>
           </div>
-        </section>
-        <section>
-          <WishlistText />
         </section>
         <section className={styles.content}>
           <div className={styles.buttons}>
