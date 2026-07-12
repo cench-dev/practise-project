@@ -7,18 +7,22 @@ import { Wishlist } from '../../Components/Wishlist/Wishlist';
 import maleIcon from '../../assets/avatar_male.svg';
 import styles from './Account.module.scss';
 import { useState } from 'react';
-function Account() {
-  type Tab = 'read' | 'planned' | 'wishlist';
-  const {isAuth, isAdmin} = useAuthSelector();
-  const [activeTab, setActiveTab] = useState<Tab>('read');
-  const tabs = [
-    { id: 'read', label: 'Прочитано'},
-    { id: 'planned', label: 'Хочу прочитать'},
-    { id: 'wishlist', label: 'Wishlist'}
-  ]
-  const dispatch = useAuthDispatch();
-  
+import { books, type BookStatus } from '../../mock/mock';
 
+const tabs: { id: BookStatus; label: string}[] = [
+  { id: 'read', label: 'Прочитано'},
+  { id: 'planned', label: 'Хочу прочитать'},
+  { id: 'wishlist', label: 'Wishlist'}
+];
+
+
+
+function Account() {
+  const {isAuth, isAdmin} = useAuthSelector();
+  const [activeTab, setActiveTab] = useState<BookStatus>('read');
+
+  const dispatch = useAuthDispatch();
+  const filteredBooks = books.map((book) => book)
   const onChangeRole = () => {
     dispatch(changeRole(!isAdmin))
   }
@@ -46,11 +50,11 @@ function Account() {
               <div className={styles.meta}>
                 <div className={styles.stats}>
                   <h2>Прочитано книг</h2>
-                  <p className={styles.count}>700</p>
+                  <p className={styles.count}>{books.filter(book => book.status === 'read').length}</p>
                 </div>
                 <div className={styles.stats}>
                   <h2>Хочу прочитать</h2>
-                  <p className={styles.count}>800</p>
+                  <p className={styles.count}>{books.filter(book => book.status === 'planned').length}</p>
                 </div>
                 <div className={styles.stats}>
                   <h2>Цель прочитать на 2026 год</h2>
