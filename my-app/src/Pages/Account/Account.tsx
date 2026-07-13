@@ -48,15 +48,15 @@ function Account() {
             <div className={styles.account__count}>
               <div className={styles.meta}>
                 <div className={styles.stats}>
-                  <h2>Прочитано книг</h2>
+                  <p>Прочитано книг</p>
                   <p className={styles.count}>{books.filter(book => book.status === 'read').length}</p>
                 </div>
                 <div className={styles.stats}>
-                  <h2>Хочу прочитать</h2>
+                  <p>Хочу прочитать</p>
                   <p className={styles.count}>{books.filter(book => book.status === 'planned').length}</p>
                 </div>
                 <div className={styles.stats}>
-                  <h2>Цель прочитать на 2026 год</h2>
+                  <p>Цель прочитать на 2026 год</p>
                   <p className={styles.count}>800</p>
                 </div>
               </div>

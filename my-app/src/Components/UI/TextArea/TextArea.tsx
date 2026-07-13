@@ -1,18 +1,13 @@
-import styles from './TextArea.module.scss'
+import type { TextareaHTMLAttributes } from 'react';
+import styles from './TextArea.module.scss';
 
+type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement>;
 
-type TextAreaProps = {
-    value: string,
-    onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void,
-    placeholder: string
-}
-export function TextArea({ value, onChange, placeholder}: TextAreaProps) {
-    return(
+export function TextArea(props: TextAreaProps) {
+    return (
         <textarea
             className={styles.area}
-            value={value}
-            onChange={onChange}
-            placeholder={placeholder}
+            {...props}
         />
     );
 }
