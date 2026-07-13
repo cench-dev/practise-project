@@ -1,8 +1,7 @@
 import { Button } from '../UI/Button/Button';
 import styles from './ModalForm.module.scss';
 import closeIcon from '../../assets/x-mark.svg';
-import * as yup from 'yup';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { plannedBookSchema } from '../../schemas/plannedBookSchema';
 import { readBookSchema } from '../../schemas/readBookSchema';
 import { wishlistSchema } from '../../schemas/wishlistSchema';
@@ -29,8 +28,8 @@ export function ModalForm({ open, onClose, status }: BookModalProps) {
     });
     if (!open) return null;
 
-    const submit = () => {
-        //console.log(data);
+    const submit = (data: BookForm) => {
+        console.log(data);
         alert('Данные приняты');
     };
     return (
@@ -45,7 +44,7 @@ export function ModalForm({ open, onClose, status }: BookModalProps) {
                         <p>{form.formState.errors.author?.message}</p>
                         {status === 'read' && (
                             <>
-                                <Input {...form.register('rating')} placeholder="Поставь оценку!"/>
+                                <Input {...form.register('rating', { setValueAs: value => value === '' ? undefined : Number(value),})} placeholder="Поставь оценку!"/>
                                 <p>{form.formState.errors.rating?.message}</p>
                                 <TextArea {...form.register('review')} placeholder="Есть что сказать про книгу? Не более 160 символов"/>
                                 <p>{form.formState.errors.review?.message}</p>
@@ -58,11 +57,11 @@ export function ModalForm({ open, onClose, status }: BookModalProps) {
                             </>
                         )}
                     </div>
-                
+                    <div className={styles.button}>
+                        <Button type='submit'>Отправить данные</Button>
+                    </div>
                 </form>
-                <div className={styles.button}>
-                    <Button onClick={submit}>Отправить данные</Button>
-                </div>
+
                 <div className={styles.modalClose}>
                     <Button onClick={onClose}><img src={closeIcon}></img></Button>
                 </div>
