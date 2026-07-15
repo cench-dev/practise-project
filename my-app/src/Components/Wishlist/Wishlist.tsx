@@ -12,8 +12,8 @@ export function Wishlist() {
             <Button icon={addIcon} onClick={() => setIsOpen(true)}>Добавить книгу</Button>
             <WishlistText />
             
-            <BookList status="wishlist"/>
-            <ModalForm open={isOpen} status="wishlist" onClose={() => setIsOpen(false)}/>
+            <BookList status="WISHLIST" userId={1}/>
+            <ModalForm open={isOpen} status="WISHLIST" onClose={() => setIsOpen(false)}/>
         </>
     )
 }

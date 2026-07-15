@@ -11,8 +11,8 @@ export function PlannedBooks() {
             <Button icon={addIcon} onClick={() => setIsOpen(true)}>
                 Добавить книгу
             </Button>
-            <BookList status="planned"/>
-            <ModalForm onClose={() => setIsOpen(false)} open={isOpen} status='planned'/>
+            <BookList status="PLANNED" userId={1}/>
+            <ModalForm onClose={() => setIsOpen(false)} open={isOpen} status='PLANNED'/>
         </>
     )
 }

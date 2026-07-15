@@ -10,6 +10,9 @@ import { Button } from '../../Components/UI/Button/Button';
 import userIcon from '../../assets/user-circle (1).svg';
 import passwordIcon from '../../assets/key.svg';
 import { useDispatch } from 'react-redux';
+import { login } from '../../api/authApi';
+
+
 
 export default function Login() {
     const dispatch = useDispatch();
@@ -20,15 +23,36 @@ export default function Login() {
         password: yup.string().required('Password must be at least 6 characters').min(6, 'Password must be at least 6 characters')
     });
 
+    type LoginForm = yup.InferType<typeof schema>;
     const form = useForm({
         resolver: yupResolver(schema)
     });
 
-    const submit = (data: yup.InferType<typeof schema>) => {
-        console.log(data);
-        dispatch(signIn())
-        navigate('/user/1');
-    };
+    const submit = async (data: LoginForm) => {
+
+        try {
+
+            const response = await login(data);
+
+            const token = response.data.token;
+
+            localStorage.setItem(
+                'token',
+                token
+            );
+
+            dispatch(signIn());
+
+            navigate(
+                `/user/${response.data.user.id}`
+            );
+
+        } catch(error) {
+
+            console.log(error);
+
+        }
+    }
 
     return(
         <section className={styles.section}>

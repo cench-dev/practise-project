@@ -10,16 +10,16 @@ import { useState } from 'react';
 import { books, type BookStatus } from '../../mock/mock';
 
 const tabs: { id: BookStatus; label: string}[] = [
-  { id: 'read', label: 'Прочитано'},
-  { id: 'planned', label: 'Хочу прочитать'},
-  { id: 'wishlist', label: 'Wishlist'}
+  { id: 'READ', label: 'Прочитано'},
+  { id: 'PLANNED', label: 'Хочу прочитать'},
+  { id: 'WISHLIST', label: 'Wishlist'}
 ];
 
 
 
 function Account() {
   const {isAuth, isAdmin} = useAuthSelector();
-  const [activeTab, setActiveTab] = useState<BookStatus>('read');
+  const [activeTab, setActiveTab] = useState<BookStatus>('READ');
 
   const dispatch = useAuthDispatch();
   const onChangeRole = () => {
@@ -49,11 +49,11 @@ function Account() {
               <div className={styles.meta}>
                 <div className={styles.stats}>
                   <p>Прочитано книг</p>
-                  <p className={styles.count}>{books.filter(book => book.status === 'read').length}</p>
+                  <p className={styles.count}>{books.filter(book => book.status === 'READ').length}</p>
                 </div>
                 <div className={styles.stats}>
                   <p>Хочу прочитать</p>
-                  <p className={styles.count}>{books.filter(book => book.status === 'planned').length}</p>
+                  <p className={styles.count}>{books.filter(book => book.status === 'PLANNED').length}</p>
                 </div>
                 <div className={styles.stats}>
                   <p>Цель прочитать на 2026 год</p>
@@ -69,9 +69,9 @@ function Account() {
               <Button key={tab.id} active={activeTab === tab.id} onClick={() => setActiveTab(tab.id)}>{tab.label}</Button>
             ))}
           </div>
-          {activeTab === 'read' && <ReadBooks />}
-          {activeTab === 'planned' && <PlannedBooks />}
-          {activeTab === 'wishlist' && <Wishlist />}
+          {activeTab === 'READ' && <ReadBooks />}
+          {activeTab === 'PLANNED' && <PlannedBooks />}
+          {activeTab === 'WISHLIST' && <Wishlist />}
         </section>
       </main>
     </>

@@ -13,9 +13,9 @@ export function ReadBooks() {
                 Добавить книгу
             </Button>
             <div className={styles.books}>
-                <BookList status='read'/>
+                <BookList status='READ' userId={1}/>
             </div>
-            <ModalForm onClose={() => setIsOpen(false)} open={isOpen} status='read'/>
+            <ModalForm onClose={() => setIsOpen(false)} open={isOpen} status='READ'/>
         </>
     )
 }

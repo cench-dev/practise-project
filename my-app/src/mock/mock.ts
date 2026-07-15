@@ -1,4 +1,4 @@
-export type BookStatus = 'read' | 'planned' | 'wishlist';
+export type BookStatus = 'READ' | 'PLANNED' | 'WISHLIST';
 
 export interface Book {
     id: number;
@@ -18,7 +18,7 @@ export const books: Book[] = [
         author: 'Дджордж оруэлл',
         rating: 5,
         review: 'Обалденно',
-        status: 'read'
+        status: 'READ'
     },
     {
         id: 2,
@@ -26,13 +26,13 @@ export const books: Book[] = [
         author: 'Булгаков',
         rating: 5,
         review: 'Остались вопросы....',
-        status: 'read'
+        status: 'READ'
     },
     {
         id: 3,
         title: 'finesss and ferb',
         author: 'pushkin',
-        status: 'planned'
+        status: 'PLANNED'
     },
         {
         id: 4,
@@ -40,6 +40,6 @@ export const books: Book[] = [
         author: 'roaling',
         link: 'http:///',
         fabric: 'литрес',
-        status: 'wishlist'
+        status: 'WISHLIST'
     },
 ]

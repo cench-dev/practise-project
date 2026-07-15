@@ -22,7 +22,7 @@ type BookModalProps = {
     status: string,
 }
 export function ModalForm({ open, onClose, status }: BookModalProps) {
-    const schema = status === 'read' ? readBookSchema : status === 'planned' ? plannedBookSchema : wishlistSchema;
+    const schema = status === 'READ' ? readBookSchema : status === 'PLANNED' ? plannedBookSchema : wishlistSchema;
     const form = useForm<BookForm>({
         resolver: yupResolver(schema)
     });
@@ -42,7 +42,7 @@ export function ModalForm({ open, onClose, status }: BookModalProps) {
                         <p>{form.formState.errors.title?.message}</p>
                         <Input {...form.register('author')} placeholder="Автор"/>
                         <p>{form.formState.errors.author?.message}</p>
-                        {status === 'read' && (
+                        {status === 'READ' && (
                             <>
                                 <Input {...form.register('rating', { setValueAs: value => value === '' ? undefined : Number(value),})} placeholder="Поставь оценку!"/>
                                 <p>{form.formState.errors.rating?.message}</p>
@@ -50,7 +50,7 @@ export function ModalForm({ open, onClose, status }: BookModalProps) {
                                 <p>{form.formState.errors.review?.message}</p>
                             </>
                         )}
-                        {status === 'wishlist' && (
+                        {status === 'WISHLIST' && (
                             <>
                                 <Input {...form.register('link')} placeholder="Прикрепи ссылку на книгу, если считаешь нужным"/>
                                 <Input {...form.register('fabric')} placeholder="Если есть пожелания по изданию"/>

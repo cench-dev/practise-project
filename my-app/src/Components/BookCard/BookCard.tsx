@@ -15,13 +15,13 @@ export function BookCard( { book }: BookCardProps) {
                 <div className={styles.meta}>
                     <p>{ book.title }</p>
                     <p>{ book.author }</p>
-                    {book.status === 'read' && (
+                    {book.status === 'READ' && (
                         <p>{book.rating}/5</p>
                     )}
-                    {book.status === 'wishlist' && (
+                    {book.status === 'WISHLIST' && (
                         <p>{book.link}/5</p>
                     )}
-                    {book.status === 'wishlist' && (
+                    {book.status === 'WISHLIST' && (
                         <p>{ book.fabric }</p>
                     )}
                 </div>
