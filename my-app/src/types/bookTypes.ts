@@ -11,3 +11,14 @@ export interface Book {
     fabric?: string;
     status: BookStatus;
 }
+
+export interface CreateBook {
+    title: string;
+    author: string;
+    rating?: number;
+    review?: string;
+    link?: string;
+    fabric?: string;
+    status: BookStatus;
+    userId: number;
+}

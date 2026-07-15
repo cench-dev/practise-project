@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { signIn } from '../../Reducers/authReducer';
+import { setUser, signIn } from '../../Reducers/authReducer';
 
 import * as yup from 'yup';
 import { Input } from '../../Components/UI/Input/Input';
@@ -10,7 +10,7 @@ import { Button } from '../../Components/UI/Button/Button';
 import userIcon from '../../assets/user-circle (1).svg';
 import passwordIcon from '../../assets/key.svg';
 import { useDispatch } from 'react-redux';
-import { login } from '../../api/authApi';
+import { login, register } from '../../api/authApi';
 
 
 
@@ -41,11 +41,63 @@ export default function Login() {
                 token
             );
 
-            dispatch(signIn());
+            localStorage.setItem(
+                'user',
+                JSON.stringify(response.data.user)
+            );
+
+            dispatch(signIn(response.data.user));
 
             navigate(
                 `/user/${response.data.user.id}`
             );
+
+        } catch(error) {
+
+            console.log(error);
+
+        }
+    }
+
+    async function handleRegister() {
+
+        try {
+
+            const userData = {
+                username: form.getValues('username'),
+                password: form.getValues('password')
+            };
+
+
+            // создаем пользователя
+            await register(userData);
+
+
+            // сразу логиним
+            const response = await login(userData);
+
+
+            localStorage.setItem(
+                'token',
+                response.data.token
+            );
+
+
+            localStorage.setItem(
+                'user',
+                JSON.stringify(response.data.user)
+            );
+
+
+            dispatch(
+                signIn(response.data.user)
+            );
+
+
+            navigate(
+                `/user/${response.data.user.id}`
+            );
+
 
         } catch(error) {
 
@@ -66,7 +118,7 @@ export default function Login() {
                 </div>
                 <div className={styles.section__buttons}>
                     <Button>Login</Button>
-                    <Button>Register</Button>
+                    <Button type='button' onClick={handleRegister}>Register</Button>
                 </div>
                 
             </form>

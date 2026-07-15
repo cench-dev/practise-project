@@ -8,6 +8,10 @@ import { wishlistSchema } from '../../schemas/wishlistSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input } from '../UI/Input/Input';
 import { TextArea } from '../UI/TextArea/TextArea';
+import { createBook } from '../../api/bookApi';
+import type { BookStatus } from '../../types/bookTypes';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../Stores/authStore';
 export interface BookForm {
     title: string;
     author: string;
@@ -19,18 +23,38 @@ export interface BookForm {
 type BookModalProps = {
     open: boolean;
     onClose: () => void;
-    status: string,
+    status: BookStatus,
 }
 export function ModalForm({ open, onClose, status }: BookModalProps) {
     const schema = status === 'READ' ? readBookSchema : status === 'PLANNED' ? plannedBookSchema : wishlistSchema;
+    const user = useSelector(
+        (state: RootState) => state.auth.user
+    )
     const form = useForm<BookForm>({
         resolver: yupResolver(schema)
     });
     if (!open) return null;
 
-    const submit = (data: BookForm) => {
-        console.log(data);
-        alert('Данные приняты');
+
+    const submit = async (data: BookForm) => {
+        if (!user) {
+            return;
+        }
+
+        try {
+            await createBook({
+                ...data,
+                status,
+                userId: user.id
+            });
+
+            alert('Книга добавлена');
+
+            onClose();
+
+        } catch(error) {
+            console.log(error);
+        }
     };
     return (
         <div className={styles.modalBackground}>

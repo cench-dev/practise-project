@@ -53,7 +53,7 @@ export async function login(req: Request, res: Response) {
         })
     };
 
-    const isPasswordValid = bcrypt.compare(
+    const isPasswordValid = await bcrypt.compare(
         password,
         user.password
     );
@@ -84,3 +84,4 @@ export async function login(req: Request, res: Response) {
         }
     });
 }
+

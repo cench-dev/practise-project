@@ -1,10 +1,10 @@
 import { Response, Request } from 'express';
 import { prisma } from '../prisma/prisma';
-import { AuthRequest } from '../middleware/authMiddleware';
+
 import { BookStatus } from '@prisma/client';
 
 export async function createBook(
-    req: AuthRequest,
+    req: Request,
     res: Response
 ) {
     try {
@@ -15,7 +15,8 @@ export async function createBook(
             review,
             link,
             fabric,
-            status
+            status,
+            userId
         } = req.body;
 
         const book = await prisma.book.create({
@@ -27,14 +28,16 @@ export async function createBook(
                 link,
                 fabric,
                 status,
-                userId: req.user!.id
+                userId
             }
         });
 
         res.status(201).json(book);
 
     } catch (error) {
+        console.log(error);
         res.status(500).json({
+            
             message: 'Server error'
         });
     }

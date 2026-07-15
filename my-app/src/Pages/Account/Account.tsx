@@ -1,13 +1,19 @@
-import { useAuthDispatch, useAuthSelector } from '../../hooks/useAuthDispatch';
-import { changeRole } from '../../Reducers/authReducer';
 import { Button } from '../../Components/UI/Button/Button';
 import { ReadBooks } from '../../Components/ReadBooks/ReadBooks';
 import { PlannedBooks } from '../../Components/PlannedBooks/PlannedBooks';
 import { Wishlist } from '../../Components/Wishlist/Wishlist';
 import maleIcon from '../../assets/avatar_male.svg';
 import styles from './Account.module.scss';
-import { useState } from 'react';
-import { books, type BookStatus } from '../../mock/mock';
+import { useEffect, useState } from 'react';
+import type { BookStatus } from '../../types/bookTypes';
+import { useBooks } from '../../hooks/useBooks';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import type { RootState } from '../../Stores/authStore';
+import { signOut } from '../../Reducers/authReducer';
+import { useUserId } from '../../hooks/useUserId';
+import { getUser } from '../../api/userApi';
+import type { User } from '../../types/userTypes';
 
 const tabs: { id: BookStatus; label: string}[] = [
   { id: 'READ', label: 'Прочитано'},
@@ -18,20 +24,48 @@ const tabs: { id: BookStatus; label: string}[] = [
 
 
 function Account() {
-  const {isAuth, isAdmin} = useAuthSelector();
   const [activeTab, setActiveTab] = useState<BookStatus>('READ');
+  const dispatch = useDispatch();
+  const userId = useUserId(); 
+  const [profile, setProfile] = useState<User | null>(null);
+  const navigate = useNavigate();
 
-  const dispatch = useAuthDispatch();
-  const onChangeRole = () => {
-    dispatch(changeRole(!isAdmin))
+  const user = useSelector(
+    (state: RootState) => state.auth.user
+  );
+
+  if (!user) {
+    return null;
+  }
+
+  const books = useBooks(userId);
+
+  useEffect(() => {
+    async function fetchUser() {
+        const user = await getUser(userId);
+        setProfile(user);
+    }
+
+    fetchUser();
+  }, [userId]);
+  
+  function logout() {
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+
+    dispatch(signOut());
+
+    navigate('/login');
+
   }
 
   return (
     <>
       <section className={styles.account__header}>
         <div className={styles.account__headerContent}>
-          <p>Добро пожаловать user!</p>
-          <Button>
+          <p>Добро пожаловать {profile?.username}!</p>
+          <Button onClick={logout}>
             Выйти
           </Button>
         </div>
@@ -39,12 +73,8 @@ function Account() {
       <main className={styles.container}>
         <section className={styles.account__info}>
           <img src={maleIcon} className={styles.avatar}></img>
-          {/* <!--<h1>{isAuth ? 'Authorized' : 'Unauthorized'}</h1>
-
-          <h2>{isAdmin ? 'Admin' : 'User'}</h2>
-          <button onClick={onChangeRole}>Change role</button> */}
           <div>
-            <h1 className={styles.title}>Привет, user!</h1>
+            <h1 className={styles.title}>Привет, {profile?.username}!</h1>
             <div className={styles.account__count}>
               <div className={styles.meta}>
                 <div className={styles.stats}>

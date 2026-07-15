@@ -18,3 +18,35 @@ export async function getUserBooks(
 
     res.json(books);
 }
+
+export async function getUser(req: Request, res: Response) {
+    try {
+
+        const id = Number(req.params.id);
+
+        const user = await prisma.user.findUnique({
+            where: {
+                id
+            },
+            select: {
+                id: true,
+                username: true
+            }
+        });
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+
+        res.json(user);
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: "Server error"
+        });
+
+    }
+}

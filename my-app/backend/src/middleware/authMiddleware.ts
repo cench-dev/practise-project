@@ -1,22 +1,15 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-export interface JwtPayload {
-    id: number;
-    username: string;
-}
-
-export interface AuthRequest extends Request {
-    user?: JwtPayload;
-}
 
 export function authMiddleware(
-    req: AuthRequest,
+    req: Request,
     res: Response,
     next: NextFunction
 ) {
 
     const authHeader = req.headers.authorization;
+
 
     if (!authHeader) {
         return res.status(401).json({
@@ -24,25 +17,36 @@ export function authMiddleware(
         });
     }
 
+
     const token = authHeader.split(" ")[1];
+
+
+    if (!token) {
+        return res.status(401).json({
+            message: "No token"
+        });
+    }
+
 
     try {
 
         const decoded = jwt.verify(
             token,
             process.env.JWT_SECRET!
-        ) as JwtPayload;
+        );
 
-        req.user = decoded;
+
+        (req as any).user = decoded;
+
 
         next();
 
-    } catch {
+
+    } catch(error) {
 
         return res.status(401).json({
             message: "Invalid token"
         });
 
     }
-
 }

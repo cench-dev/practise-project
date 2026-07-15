@@ -7,3 +7,10 @@ export function login(data: {
 }) {
     return api.post('/auth/login', data);
 }
+
+export function register(data: {
+    username: string;
+    password: string;
+}) {
+    return api.post('/auth/register', data);
+}
