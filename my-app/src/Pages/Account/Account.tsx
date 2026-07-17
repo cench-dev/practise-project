@@ -14,7 +14,8 @@ import { signOut } from '../../Reducers/authReducer';
 import { useUserId } from '../../hooks/useUserId';
 import { getUser } from '../../api/userApi';
 import type { User } from '../../types/userTypes';
-import { ReadGoal } from '../../Components/ReadGoal/ReadGoal';
+import { updateGoal } from '../../api/userApi';
+import { Input } from '../../Components/UI/Input/Input';
 
 const tabs: { id: BookStatus; label: string}[] = [
   { id: 'READ', label: 'Прочитано'},
@@ -22,13 +23,14 @@ const tabs: { id: BookStatus; label: string}[] = [
   { id: 'WISHLIST', label: 'Wishlist'}
 ];
 
-
-
 function Account() {
   const [activeTab, setActiveTab] = useState<BookStatus>('READ');
   const dispatch = useDispatch();
   const userId = useUserId(); 
   const [profile, setProfile] = useState<User | null>(null);
+  const [isGoalEdit, setIsGoalEdit] = useState(false);
+  const [goal, setGoal] = useState(profile?.readingGoal ?? 0);
+  const [year, setYear] = useState(profile?.goalYear ?? new Date().getFullYear());
   const navigate = useNavigate();
 
   const user = useSelector(
@@ -43,23 +45,41 @@ function Account() {
 
   useEffect(() => {
     async function fetchUser() {
-        const user = await getUser(userId);
-        setProfile(user);
+        const data = await getUser(userId);
+        setProfile(data);
     }
 
     fetchUser();
   }, [userId]);
+  useEffect(() => {
+      if (profile) {
+          setGoal(profile.readingGoal);
+          setYear(profile.goalYear ?? new Date().getFullYear());
+      }
+  }, [profile]);
   
   function logout() {
-
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-
     dispatch(signOut());
-
     navigate('/login');
-
   }
+
+  async function saveGoal() {
+    await updateGoal(
+        userId,
+        goal,
+        year
+    );
+
+    setProfile({
+        ...profile!,
+        readingGoal: goal,
+        goalYear: year
+    });
+
+    setIsGoalEdit(false);
+}
 
   return (
     <>
@@ -87,15 +107,44 @@ function Account() {
                   <p className={styles.count}>{books.filter(book => book.status === 'PLANNED').length}</p>
                 </div>
                 <div className={styles.stats}>
-                  <p>Цель прочитать на {profile?.goalYear ?? 'год'} год</p>
-                  <p className={styles.count}>{profile?.readingGoal ?? 0}</p>
+                    <p>Цель прочитать на {profile?.goalYear ?? 'год'}</p>
+                    <p className={styles.count}>
+                        {profile?.readingGoal ?? 0}
+                    </p>
+
                 </div>
               </div>
             </div>
           </div>
         </section>
         <section className={styles.content}>
-          <ReadGoal />
+          <Button onClick={() => setIsGoalEdit(!isGoalEdit)}>
+            Изменить цель на год
+          </Button>
+          {isGoalEdit && (
+            <div className={styles.inputs}>
+              <Input
+                  type="number"
+                  value={year}
+                  onChange={(e) =>
+                      setYear(Number(e.target.value))
+                  }
+                  placeholder="Год"
+              />
+              <Input
+                  type="number"
+                  value={goal}
+                  onChange={(e) =>
+                      setGoal(Number(e.target.value))
+                  }
+                  placeholder="Количество книг"
+              />
+              <Button onClick={saveGoal}>
+                  Сохранить
+              </Button>
+
+            </div>
+          )}
           <div className={styles.buttons}>
             {tabs.map((tab) =>(
               <Button key={tab.id} active={activeTab === tab.id} onClick={() => setActiveTab(tab.id)}>{tab.label}</Button>

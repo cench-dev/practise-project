@@ -20,6 +20,8 @@ export interface BookForm {
     review?: string;
     link?: string;
     fabric?: string;
+    readingGoal?: number;
+    goalYear?: number;
 }
 type BookModalProps = {
     open: boolean;
@@ -40,7 +42,9 @@ export function ModalForm({ open, onClose, status, book }: BookModalProps) {
             rating: book?.rating,
             review: book?.review ?? "",
             link: book?.link ?? "",
-            fabric: book?.fabric ?? ""
+            fabric: book?.fabric ?? "",
+            readingGoal: 0,
+            goalYear: new Date().getFullYear()   
         }
     });
 
@@ -110,7 +114,7 @@ export function ModalForm({ open, onClose, status, book }: BookModalProps) {
                         )}
                     </div>
                     <div className={styles.button}>
-                        <Button type='submit'>Отправить данные</Button>
+                        <Button type='submit'>Добавить книгу</Button>
                     </div>
                 </form>
 
