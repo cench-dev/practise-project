@@ -14,6 +14,7 @@ import { signOut } from '../../Reducers/authReducer';
 import { useUserId } from '../../hooks/useUserId';
 import { getUser } from '../../api/userApi';
 import type { User } from '../../types/userTypes';
+import { ReadGoal } from '../../Components/ReadGoal/ReadGoal';
 
 const tabs: { id: BookStatus; label: string}[] = [
   { id: 'READ', label: 'Прочитано'},
@@ -94,6 +95,7 @@ function Account() {
           </div>
         </section>
         <section className={styles.content}>
+          <ReadGoal />
           <div className={styles.buttons}>
             {tabs.map((tab) =>(
               <Button key={tab.id} active={activeTab === tab.id} onClick={() => setActiveTab(tab.id)}>{tab.label}</Button>
