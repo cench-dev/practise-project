@@ -2,10 +2,7 @@ import { Request, Response } from 'express';
 import { prisma } from '../prisma/prisma';
 import { BookStatus } from '@prisma/client';
 
-export async function getUserBooks(
-    req: Request,
-    res: Response
-) {
+export async function getUserBooks(req: Request, res: Response) {
     const userId = Number(req.params.id);
     const status = req.query.status as BookStatus;
 
@@ -48,5 +45,42 @@ export async function getUser(req: Request, res: Response) {
             message: "Server error"
         });
 
+    }
+}
+
+export async function updateGoal(
+    req: Request,
+    res: Response
+) {
+    try {
+
+        const { readingGoal, goalYear } = req.body;
+        const userId = Number(req.params.id);
+
+
+        const user = await prisma.user.update({
+            where: {
+                id: userId
+            },
+            data: {
+                readingGoal,
+                goalYear
+            }
+        });
+
+
+        res.json({
+            readingGoal: user.readingGoal,
+            goalYear: user.goalYear
+        });
+
+
+    } catch(error) {
+
+        console.log(error);
+
+        res.status(500).json({
+            message: "Server error"
+        });
     }
 }
