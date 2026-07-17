@@ -13,9 +13,10 @@ function App() {
     <Provider store={authStore}>
       <BrowserRouter>
         <Routes>
+          <Route path='/' element={<Login />} />
           <Route path='/login' element={<Login />} />
 
-          <Route path='/' element={<ProtectedPages />}>
+          <Route element={<ProtectedPages />}>
             <Route path='/user/:id' element={<Account />} />
           </Route>
 
