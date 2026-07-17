@@ -1,12 +1,9 @@
-import { Response, Request } from 'express';
+import { Response } from 'express';
+import type { AuthRequest } from '../types/authRequest';
 import { prisma } from '../prisma/prisma';
-
 import { BookStatus } from '@prisma/client';
 
-export async function createBook(
-    req: Request,
-    res: Response
-) {
+export async function createBook(req: AuthRequest, res: Response) {
     try {
         const {
             title,
@@ -16,7 +13,6 @@ export async function createBook(
             link,
             fabric,
             status,
-            userId
         } = req.body;
 
         const book = await prisma.book.create({
@@ -28,7 +24,7 @@ export async function createBook(
                 link,
                 fabric,
                 status,
-                userId
+                userId: req.user!.id
             }
         });
 
@@ -44,7 +40,7 @@ export async function createBook(
 }
 
 export async function getUserBooks(
-    req: Request,
+    req: AuthRequest,
     res: Response
 ) {
     try {
@@ -67,7 +63,7 @@ export async function getUserBooks(
     }
 }
 
-export async function markBookAsRead(req: Request, res: Response) {
+export async function markBookAsRead(req: AuthRequest, res: Response) {
     try {
 
         const id = Number(req.params.id);
