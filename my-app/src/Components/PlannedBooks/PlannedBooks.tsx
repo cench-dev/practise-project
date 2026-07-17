@@ -5,9 +5,11 @@ import { ModalForm } from "../ModalForm/ModalForm";
 import { useState } from "react";
 import { useUserId } from "../../hooks/useUserId";
 import type { Book, BookStatus } from "../../types/bookTypes";
+import { useIsOwner } from "../../hooks/useIsOwner";
 
 export function PlannedBooks() {
     const [isOpen, setIsOpen] = useState(false);
+    const isOwner = useIsOwner();
     const [selectedBook, setSelectedBook] = useState<Book | null>(null);
     const [modalStatus, setModalStatus] = useState<BookStatus>('PLANNED');
     const userId = useUserId();
@@ -24,9 +26,12 @@ export function PlannedBooks() {
     }
     return(
         <>
-            <Button icon={addIcon} onClick={handleAddBook}>
-                Добавить книгу
-            </Button>
+            {isOwner && (
+                <Button icon={addIcon} onClick={handleAddBook}>
+                    Добавить книгу
+                </Button>
+            )}
+
             <BookList status="PLANNED" userId={userId} onMarkAsRead={handleMarkAsRead}/>
             <ModalForm onClose={() => {setIsOpen(false); setSelectedBook(null);}} 
                 open={isOpen} 

@@ -5,13 +5,18 @@ import { BookList } from "../BookList/BookList";
 import { ModalForm } from "../ModalForm/ModalForm";
 import { useState } from "react";
 import { useUserId } from "../../hooks/useUserId";
+import { useIsOwner } from "../../hooks/useIsOwner";
+
 
 export function Wishlist() {
     const [isOpen, setIsOpen] = useState(false);
+    const isOwner = useIsOwner();
     const userId = useUserId();
     return(
         <>
-            <Button icon={addIcon} onClick={() => setIsOpen(true)}>Добавить книгу</Button>
+            {isOwner && (
+                <Button icon={addIcon} onClick={() => setIsOpen(true)}>Добавить книгу</Button>
+            )}
             <WishlistText />
             
             <BookList status="WISHLIST" userId={userId}/>
