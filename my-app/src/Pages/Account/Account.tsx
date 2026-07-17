@@ -86,8 +86,8 @@ function Account() {
                   <p className={styles.count}>{books.filter(book => book.status === 'PLANNED').length}</p>
                 </div>
                 <div className={styles.stats}>
-                  <p>Цель прочитать на 2026 год</p>
-                  <p className={styles.count}>800</p>
+                  <p>Цель прочитать на {profile?.goalYear ?? 'год'} год</p>
+                  <p className={styles.count}>{profile?.readingGoal ?? 0}</p>
                 </div>
               </div>
             </div>

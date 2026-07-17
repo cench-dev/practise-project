@@ -48,10 +48,7 @@ export async function getUser(req: Request, res: Response) {
     }
 }
 
-export async function updateGoal(
-    req: Request,
-    res: Response
-) {
+export async function updateGoal(req: Request, res: Response) {
     try {
 
         const { readingGoal, goalYear } = req.body;
