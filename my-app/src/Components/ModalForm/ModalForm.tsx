@@ -8,10 +8,11 @@ import { wishlistSchema } from '../../schemas/wishlistSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input } from '../UI/Input/Input';
 import { TextArea } from '../UI/TextArea/TextArea';
-import { createBook } from '../../api/bookApi';
-import type { BookStatus } from '../../types/bookTypes';
+import { createBook, markBookAsRead } from '../../api/bookApi';
+import type { Book, BookStatus } from '../../types/bookTypes';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../Stores/authStore';
+import { useEffect } from 'react';
 export interface BookForm {
     title: string;
     author: string;
@@ -23,16 +24,36 @@ export interface BookForm {
 type BookModalProps = {
     open: boolean;
     onClose: () => void;
-    status: BookStatus,
+    status: BookStatus;
+    book?: Book;
 }
-export function ModalForm({ open, onClose, status }: BookModalProps) {
+export function ModalForm({ open, onClose, status, book }: BookModalProps) {
     const schema = status === 'READ' ? readBookSchema : status === 'PLANNED' ? plannedBookSchema : wishlistSchema;
     const user = useSelector(
         (state: RootState) => state.auth.user
     )
     const form = useForm<BookForm>({
-        resolver: yupResolver(schema)
+        resolver: yupResolver(schema),
+        defaultValues: {
+            title: book?.title ?? "",
+            author: book?.author ?? "",
+            rating: book?.rating,
+            review: book?.review ?? "",
+            link: book?.link ?? "",
+            fabric: book?.fabric ?? ""
+        }
     });
+
+    useEffect(() => {
+        form.reset({
+            title: book?.title ?? "",
+            author: book?.author ?? "",
+            rating: book?.rating,
+            review: book?.review ?? "",
+            link: book?.link ?? "",
+            fabric: book?.fabric ?? ""
+        });
+    }, [book]);
     if (!open) return null;
 
 
@@ -42,11 +63,18 @@ export function ModalForm({ open, onClose, status }: BookModalProps) {
         }
 
         try {
-            await createBook({
-                ...data,
-                status,
-                userId: user.id
-            });
+            if (book) {
+                await markBookAsRead(book.id, {
+                    rating: data.rating,
+                    review: data.review
+                });
+            } else {
+                await createBook({
+                    ...data,
+                    status,
+                    userId: user.id
+                });
+            }
 
             alert('Книга добавлена');
 

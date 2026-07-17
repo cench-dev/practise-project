@@ -4,17 +4,35 @@ import { BookList } from "../BookList/BookList";
 import { ModalForm } from "../ModalForm/ModalForm";
 import { useState } from "react";
 import { useUserId } from "../../hooks/useUserId";
+import type { Book, BookStatus } from "../../types/bookTypes";
 
 export function PlannedBooks() {
     const [isOpen, setIsOpen] = useState(false);
+    const [selectedBook, setSelectedBook] = useState<Book | null>(null);
+    const [modalStatus, setModalStatus] = useState<BookStatus>('PLANNED');
     const userId = useUserId();
+    function handleMarkAsRead(book: Book) {
+        setSelectedBook(book);
+        setModalStatus('READ');
+        setIsOpen(true);
+    }
+
+    function handleAddBook() {
+        setSelectedBook(null);
+        setModalStatus('PLANNED')
+        setIsOpen(true);
+    }
     return(
         <>
-            <Button icon={addIcon} onClick={() => setIsOpen(true)}>
+            <Button icon={addIcon} onClick={handleAddBook}>
                 Добавить книгу
             </Button>
-            <BookList status="PLANNED" userId={userId}/>
-            <ModalForm onClose={() => setIsOpen(false)} open={isOpen} status='PLANNED'/>
+            <BookList status="PLANNED" userId={userId} onMarkAsRead={handleMarkAsRead}/>
+            <ModalForm onClose={() => {setIsOpen(false); setSelectedBook(null);}} 
+                open={isOpen} 
+                status={modalStatus} 
+                book={selectedBook ?? undefined}
+            />
         </>
     )
 }

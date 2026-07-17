@@ -1,12 +1,16 @@
 import styles from './BookCard.module.scss';
 import bookIcon from '../../assets/book-open.svg';
 import type { Book } from '../../types/bookTypes';
+import { Button } from '../UI/Button/Button';
 
 type BookCardProps = {
     book: Book;
+    onMarkAsRead?: (book: Book) => void;
 }
 
-export function BookCard( { book }: BookCardProps) {
+
+
+export function BookCard( { book, onMarkAsRead }: BookCardProps) {
     return (
         <div className={styles.book}>
             <img src={bookIcon} className={styles.icon}></img>
@@ -26,6 +30,9 @@ export function BookCard( { book }: BookCardProps) {
                 </div>
                 <p>{ book.review }</p>    
             </div>
+            {book.status === 'PLANNED' && (
+                <Button onClick={() => onMarkAsRead?.(book)}>Прочитано</Button>
+            )}
             
         </div>
     )

@@ -38,3 +38,18 @@ export async function getAllUserBooks(
     return response.data;
 
 }
+
+export async function markBookAsRead(
+    id: number,
+    data: {
+        rating?: number;
+        review?: string;
+    }
+) {
+    const response = await api.patch(
+        `http://localhost:5000/books/${id}/read`,
+        data
+    );
+
+    return response.data;
+}

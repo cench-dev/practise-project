@@ -66,3 +66,32 @@ export async function getUserBooks(
         });
     }
 }
+
+export async function markBookAsRead(req: Request, res: Response) {
+    try {
+
+        const id = Number(req.params.id);
+
+        const { rating, review } = req.body;
+
+        const book = await prisma.book.update({
+            where: {
+                id
+            },
+            data: {
+                status: "READ",
+                rating,
+                review
+            }
+        });
+
+        res.json(book);
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: "Server error"
+        });
+
+    }
+}
