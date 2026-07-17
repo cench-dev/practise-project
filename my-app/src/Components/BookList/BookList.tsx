@@ -8,10 +8,11 @@ type BookListProps = {
     status: BookStatus;
     userId: number;
     onMarkAsRead?: (book: Book) => void;
+    canEdit?: boolean;
 };
 
 
-export function BookList({ status, userId, onMarkAsRead }: BookListProps) {
+export function BookList({ status, userId, onMarkAsRead, canEdit }: BookListProps) {
     const [books, setBooks] = useState<Book[]>([]);
 
     useEffect(() => {
@@ -36,6 +37,7 @@ export function BookList({ status, userId, onMarkAsRead }: BookListProps) {
                     key={book.id}
                     book={book}
                     onMarkAsRead={onMarkAsRead}
+                    canEdit={canEdit}
                 />
             ))}
         </div>

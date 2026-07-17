@@ -6,11 +6,12 @@ import { Button } from '../UI/Button/Button';
 type BookCardProps = {
     book: Book;
     onMarkAsRead?: (book: Book) => void;
+    canEdit?: boolean;
 }
 
 
 
-export function BookCard( { book, onMarkAsRead }: BookCardProps) {
+export function BookCard( { book, onMarkAsRead, canEdit }: BookCardProps) {
     return (
         <div className={styles.book}>
             <img src={bookIcon} className={styles.icon}></img>
@@ -30,7 +31,7 @@ export function BookCard( { book, onMarkAsRead }: BookCardProps) {
                 </div>
                 <p>{ book.review }</p>    
             </div>
-            {book.status === 'PLANNED' && (
+            {book.status === 'PLANNED' && canEdit && (
                 <Button onClick={() => onMarkAsRead?.(book)}>Прочитано</Button>
             )}
             
