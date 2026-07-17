@@ -32,11 +32,12 @@ export function PlannedBooks() {
                 </Button>
             )}
 
-            <BookList status="PLANNED" userId={userId} onMarkAsRead={handleMarkAsRead}/>
+            <BookList status="PLANNED" userId={userId} onMarkAsRead={handleMarkAsRead} canEdit={isOwner}/>
             <ModalForm onClose={() => {setIsOpen(false); setSelectedBook(null);}} 
                 open={isOpen} 
                 status={modalStatus} 
                 book={selectedBook ?? undefined}
+                
             />
         </>
     )

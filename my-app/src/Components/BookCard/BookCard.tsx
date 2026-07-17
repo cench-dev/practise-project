@@ -23,14 +23,21 @@ export function BookCard( { book, onMarkAsRead, canEdit }: BookCardProps) {
                         <p>{book.rating}/5</p>
                     )}
                     {book.status === 'WISHLIST' && (
-                        <p>{book.link}/5</p>
+                        <a
+                            href={book.link} target="_blank" rel="noopener noreferrer" className={styles.link}>
+                            Ссылка на книгу
+                        </a>
                     )}
                     {book.status === 'WISHLIST' && (
                         <p>{ book.fabric }</p>
                     )}
-                </div>
-                <p>{ book.review }</p>    
+                </div>    
             </div>
+            {book.status === 'READ' &&
+                (<div className={styles.review}>
+                    <p>{ book.review }</p>
+                </div>
+            )}
             {book.status === 'PLANNED' && canEdit && (
                 <Button onClick={() => onMarkAsRead?.(book)}>Прочитано</Button>
             )}
