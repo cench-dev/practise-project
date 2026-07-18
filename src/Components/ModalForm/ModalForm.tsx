@@ -1,7 +1,7 @@
 import { Button } from '../UI/Button/Button';
 import styles from './ModalForm.module.scss';
 import closeIcon from '../../assets/x-mark.svg';
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 import { plannedBookSchema } from '../../schemas/plannedBookSchema';
 import { readBookSchema } from '../../schemas/readBookSchema';
 import { wishlistSchema } from '../../schemas/wishlistSchema';
