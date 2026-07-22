@@ -10,9 +10,10 @@ import { Input } from '../UI/Input/Input';
 import { TextArea } from '../UI/TextArea/TextArea';
 import { createBook, markBookAsRead } from '../../api/bookApi';
 import type { Book, BookStatus } from '../../types/bookTypes';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../../Stores/authStore';
 import { useEffect } from 'react';
+import { showToast } from '../../Reducers/toastReducer';
 export interface BookForm {
     title: string;
     author: string;
@@ -48,6 +49,8 @@ export function ModalForm({ open, onClose, status, book }: BookModalProps) {
         }
     });
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
         form.reset({
             title: book?.title ?? "",
@@ -80,7 +83,7 @@ export function ModalForm({ open, onClose, status, book }: BookModalProps) {
                 });
             }
 
-            alert('Книга добавлена');
+            dispatch(showToast("Книга успешно добавлена"));
 
             onClose();
 
@@ -126,3 +129,4 @@ export function ModalForm({ open, onClose, status, book }: BookModalProps) {
         </div>
     )
 }
+

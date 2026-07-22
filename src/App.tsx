@@ -6,11 +6,13 @@ import { useEffect } from 'react';
 import type { RootState } from './Stores/authStore';
 import './App.css'
 import Account from './Pages/Account/Account';
+import { Toast } from './Components/Toast/Toast';
 
 
 function App() {
   return (
     <Provider store={authStore}>
+      <Toast />
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Login />} />
