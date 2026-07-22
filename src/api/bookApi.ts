@@ -47,7 +47,7 @@ export async function markBookAsRead(
     }
 ) {
     const response = await api.patch(
-        `http://localhost:5000/books/${id}/read`,
+        `/books/${id}/read`,
         data
     );
 

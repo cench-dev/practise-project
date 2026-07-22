@@ -14,7 +14,7 @@ export async function updateGoal(
     goalYear: number
 ) {
     const response = await api.patch(
-        `http://localhost:5000/users/${userId}/goal`,
+        `/users/${userId}/goal`,
         {
             readingGoal,
             goalYear
