@@ -10,7 +10,7 @@ import { useBooks } from '../../hooks/useBooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import type { RootState } from '../../stores/authStore';
-import { signOut } from '../../reducers/AuthReducer';
+import { signOut } from '../../reducers/authReducer';
 import { useUserId } from '../../hooks/useUserId';
 import { getUser } from '../../api/userApi';
 import type { User } from '../../types/UserTypes';
