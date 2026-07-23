@@ -1,12 +1,12 @@
 import { BrowserRouter, Outlet, Route, Routes, useNavigate } from 'react-router-dom';
-import Login from './Pages/Login/Login';
+import Login from './pages/Login/Login';
 import { Provider, useSelector } from 'react-redux';
-import { authStore } from './Stores/authStore';
+import { authStore } from './stores/authStore';
 import { useEffect } from 'react';
-import type { RootState } from './Stores/authStore';
+import type { RootState } from './stores/authStore';
 import './App.css'
-import Account from './Pages/Account/Account';
-import { Toast } from './Components/Toast/Toast';
+import Account from './pages/Account/Account';
+import { Toast } from './components/Toast/Toast';
 
 
 function App() {

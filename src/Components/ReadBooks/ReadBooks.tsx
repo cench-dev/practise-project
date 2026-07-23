@@ -4,8 +4,8 @@ import styles from './ReadBooks.module.scss'
 import { BookList } from "../BookList/BookList";
 import { useState } from "react";
 import { ModalForm } from "../ModalForm/ModalForm";
-import { useUserId } from "../../Hooks/useUserId";
-import { useIsOwner } from "../../Hooks/useIsOwner";
+import { useUserId } from "../../hooks/useUserId";
+import { useIsOwner } from "../../hooks/useIsOwner";
 export function ReadBooks() {
     const [isOpen, setIsOpen] = useState(false);
     const isOwner = useIsOwner();

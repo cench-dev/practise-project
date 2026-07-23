@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllUserBooks } from "../api/bookApi";
-import type { Book } from "../Types/BookTypes";
+import type { Book } from "../types/BookTypes";
 
 
 export function useBooks(userId: number) {

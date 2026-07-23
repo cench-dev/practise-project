@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import type { RootState } from "../Stores/authStore";
+import type { RootState } from "../stores/authStore";
 import { useUserId } from "./useUserId";
 
 export function useIsOwner() {

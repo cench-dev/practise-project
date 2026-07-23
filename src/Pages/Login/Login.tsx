@@ -2,11 +2,11 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { signIn } from '../../Reducers/AuthReducer';
+import { signIn } from '../../reducers/authReducer';
 
 import * as yup from 'yup';
-import { Input } from '../../Components/UI/Input/Input';
-import { Button } from '../../Components/UI/Button/Button';
+import { Input } from '../../components/UI/Input/Input';
+import { Button } from '../../components/UI/Button/Button';
 import userIcon from '../../assets/user-circle (1).svg';
 import passwordIcon from '../../assets/key.svg';
 import { useDispatch } from 'react-redux';

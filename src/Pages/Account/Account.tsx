@@ -1,21 +1,21 @@
-import { Button } from '../../Components/UI/Button/Button';
-import { ReadBooks } from '../../Components/ReadBooks/ReadBooks';
-import { PlannedBooks } from '../../Components/PlannedBooks/PlannedBooks';
-import { Wishlist } from '../../Components/Wishlist/Wishlist';
+import { Button } from '../../components/UI/Button/Button';
+import { ReadBooks } from '../../components/ReadBooks/ReadBooks';
+import { PlannedBooks } from '../../components/PlannedBooks/PlannedBooks';
+import { Wishlist } from '../../components/Wishlist/Wishlist';
 import maleIcon from '../../assets/avatar_male.svg';
 import styles from './Account.module.scss';
 import { useEffect, useState } from 'react';
-import type { BookStatus } from '../../Types/BookTypes';
-import { useBooks } from '../../Hooks/useBooks';
+import type { BookStatus } from '../../types/BookTypes';
+import { useBooks } from '../../hooks/useBooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import type { RootState } from '../../Stores/authStore';
-import { signOut } from '../../Reducers/AuthReducer';
-import { useUserId } from '../../Hooks/useUserId';
+import type { RootState } from '../../stores/authStore';
+import { signOut } from '../../reducers/AuthReducer';
+import { useUserId } from '../../hooks/useUserId';
 import { getUser } from '../../api/userApi';
-import type { User } from '../../Types/UserTypes';
+import type { User } from '../../types/UserTypes';
 import { updateGoal } from '../../api/userApi';
-import { Input } from '../../Components/UI/Input/Input';
+import { Input } from '../../components/UI/Input/Input';
 
 const tabs: { id: BookStatus; label: string}[] = [
   { id: 'READ', label: 'Прочитано'},
