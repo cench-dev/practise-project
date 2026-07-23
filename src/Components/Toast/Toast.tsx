@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../../stores/authStore";
-import { hideToast } from "../../reducers/toastReducer";
+import type { RootState } from "../../Stores/authStore";
+import { hideToast } from "../../Reducers/toastReducer";
 
 import styles from "./Toast.module.scss";
 

@@ -11,9 +11,9 @@ import { TextArea } from '../UI/TextArea/TextArea';
 import { createBook, markBookAsRead } from '../../api/bookApi';
 import type { Book, BookStatus } from '../../types/BookTypes';
 import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '../../stores/authStore';
+import type { RootState } from '../../Stores/authStore';
 import { useEffect } from 'react';
-import { showToast } from '../../reducers/toastReducer';
+import { showToast } from '../../Reducers/toastReducer';
 export interface BookForm {
     title: string;
     author: string;
