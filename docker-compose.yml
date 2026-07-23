@@ -27,8 +27,7 @@ services:
       - "5000:5000"
 
     environment:
-      DATABASE_URL: postgresql://neondb_owner:npg_7OmX3PUyRYDK@ep-spring-art-awmp3ia1.c-12.us-east-1.aws.neon.tech/neondb?sslmode=require
-      JWT_SECRET: my_book_tracker_secret_2026
+
 
 volumes:
   postgres_data:
