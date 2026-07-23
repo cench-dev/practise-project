@@ -25,68 +25,46 @@ url: https://practise-project-jet.vercel.app/ (vercel)
 
 - PostgreSQL (Neon)
 
-### 1. Клонировать репозиторий
+# Запуск проекта
+
+## Запуск через Docker
+
+### Требования
+
+- Docker Desktop
+
+### Запуск
 
 ```bash
-git clone <https://github.com/cench-dev/practise-project>
+git clone https://github.com/cench-dev/practise-project.git
+
+cd practise-project
+
+docker compose up --build
 ```
 
-### 2. Установить зависимости
+После запуска:
 
-Frontend
+Backend:
+
+```
+http://localhost:5000
+```
+
+Для запуска frontend в режиме разработки:
 
 ```bash
 npm install
-```
-
-Backend
-
-```bash
-cd backend
-npm install
-```
-
-
-### 3. Создать `.env`
-
-Frontend
-
-```env
-VITE_API_URL=http://localhost:5000
-```
-
-Backend
-
-```env
-DATABASE_URL=
-JWT_SECRET=
-```
-
-
-### 4. Применить миграции Prisma
-
-```bash
-npx prisma migrate deploy
-```
-
-или при локальной разработке
-
-```bash
-npx prisma migrate dev
-```
-
-
-### 5. Запустить backend
-
-```bash
 npm run dev
 ```
 
-### 6. Запустить frontend
+Frontend будет доступен по адресу:
 
-```bash
-npm run dev
 ```
+http://localhost:5173
+```
+
+
 
 
 ## UI-kit
