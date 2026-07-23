@@ -3,9 +3,9 @@ import addIcon from '../../assets/plus.svg';
 import { BookList } from "../BookList/BookList";
 import { ModalForm } from "../ModalForm/ModalForm";
 import { useState } from "react";
-import { useUserId } from "../../hooks/useUserId";
-import type { Book, BookStatus } from "../../types/bookTypes";
-import { useIsOwner } from "../../hooks/useIsOwner";
+import { useUserId } from "../../Hooks/useUserId";
+import type { Book, BookStatus } from "../../Types/BookTypes";
+import { useIsOwner } from "../../Hooks/useIsOwner";
 
 export function PlannedBooks() {
     const [isOpen, setIsOpen] = useState(false);

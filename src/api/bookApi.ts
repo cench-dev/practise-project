@@ -1,5 +1,5 @@
 import { api } from './axios';
-import type { CreateBook, BookStatus } from '../types/bookTypes';
+import type { CreateBook, BookStatus } from '../Types/BookTypes';
 
 
 export async function getUserBooks(

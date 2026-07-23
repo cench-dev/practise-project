@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "../UI/Button/Button";
 import { updateGoal } from "../../api/userApi";
-import type { User } from "../../types/userTypes";
+import type { User } from "../../Types/UserTypes";
 
 
 type Props = {

@@ -4,8 +4,8 @@ import addIcon from '../../assets/plus.svg';
 import { BookList } from "../BookList/BookList";
 import { ModalForm } from "../ModalForm/ModalForm";
 import { useState } from "react";
-import { useUserId } from "../../hooks/useUserId";
-import { useIsOwner } from "../../hooks/useIsOwner";
+import { useUserId } from "../../Hooks/useUserId";
+import { useIsOwner } from "../../Hooks/useIsOwner";
 
 
 export function Wishlist() {
