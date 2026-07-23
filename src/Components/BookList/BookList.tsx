@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BookCard } from '../BookCard/BookCard';
 import { getUserBooks } from '../../api/bookApi';
-import type { Book, BookStatus} from '../../types/BookTypes';
+import type { Book, BookStatus} from '../../types/bookTypes';
 import styles from './BookList.module.scss';
 
 type BookListProps = {

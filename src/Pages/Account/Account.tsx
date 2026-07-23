@@ -5,7 +5,7 @@ import { Wishlist } from '../../Components/Wishlist/Wishlist';
 import maleIcon from '../../assets/avatar_male.svg';
 import styles from './Account.module.scss';
 import { useEffect, useState } from 'react';
-import type { BookStatus } from '../../types/BookTypes';
+import type { BookStatus } from '../../types/bookTypes';
 import { useBooks } from '../../hooks/useBooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +13,7 @@ import type { RootState } from '../../Stores/authStore';
 import { signOut } from '../../Reducers/authReducer';
 import { useUserId } from '../../hooks/useUserId';
 import { getUser } from '../../api/userApi';
-import type { User } from '../../types/UserTypes';
+import type { User } from '../../types/userTypes';
 import { updateGoal } from '../../api/userApi';
 import { Input } from '../../Components/UI/Input/Input';
 

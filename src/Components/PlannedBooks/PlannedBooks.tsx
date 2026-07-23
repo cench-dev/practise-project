@@ -4,7 +4,7 @@ import { BookList } from "../BookList/BookList";
 import { ModalForm } from "../ModalForm/ModalForm";
 import { useState } from "react";
 import { useUserId } from "../../hooks/useUserId";
-import type { Book, BookStatus } from "../../types/BookTypes";
+import type { Book, BookStatus } from "../../types/bookTypes";
 import { useIsOwner } from "../../hooks/useIsOwner";
 
 export function PlannedBooks() {

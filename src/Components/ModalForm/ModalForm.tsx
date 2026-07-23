@@ -9,7 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Input } from '../UI/Input/Input';
 import { TextArea } from '../UI/TextArea/TextArea';
 import { createBook, markBookAsRead } from '../../api/bookApi';
-import type { Book, BookStatus } from '../../types/BookTypes';
+import type { Book, BookStatus } from '../../types/bookTypes';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../../Stores/authStore';
 import { useEffect } from 'react';

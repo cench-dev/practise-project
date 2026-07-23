@@ -1,6 +1,6 @@
 import styles from './BookCard.module.scss';
 import bookIcon from '../../assets/book-open.svg';
-import type { Book } from '../../types/BookTypes';
+import type { Book } from '../../types/bookTypes';
 import { Button } from '../UI/Button/Button';
 
 type BookCardProps = {
