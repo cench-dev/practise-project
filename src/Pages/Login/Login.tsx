@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { signIn } from '../../Reducers/authReducer';
+import { signIn } from '../../Reducers/AuthReducer';
 
 import * as yup from 'yup';
 import { Input } from '../../Components/UI/Input/Input';

@@ -10,10 +10,10 @@ import { useBooks } from '../../Hooks/useBooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import type { RootState } from '../../Stores/authStore';
-import { signOut } from '../../Reducers/authReducer';
+import { signOut } from '../../Reducers/AuthReducer';
 import { useUserId } from '../../Hooks/useUserId';
 import { getUser } from '../../api/userApi';
-import type { User } from '../../Types/userTypes';
+import type { User } from '../../Types/UserTypes';
 import { updateGoal } from '../../api/userApi';
 import { Input } from '../../Components/UI/Input/Input';
 
