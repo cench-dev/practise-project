@@ -1,7 +1,5 @@
 # LibBooks
 Web-приложение для трекинга прочитанных книг
-## Демо
-url: https://practise-project-jet.vercel.app/ (vercel)
 ## Стек технологий
 ### Frontend
 - React
